@@ -17,31 +17,8 @@ git clone https://github.com/WilsonH918/EnergyStocks_HistoricalPrice_DataPipelin
 
 Install the required Python packages:
 
-bash
-
-pip install -r requirements.txt
-
-Create a virtual environment (optional but recommended):
-
-bash
-
-    python -m venv env
-    source env/bin/activate
-
-    Create an AWS S3 bucket to store the data and update the config.json file with your bucket name.
-
-    Create a Snowflake data warehouse and update the config.json file with your Snowflake credentials.
-
-    Create an AWS Lambda function to trigger the pipeline script and configure it to run on a scheduled basis. Update the config.json file with your Lambda function name and schedule.
-
-    Update the get_symbols.py file with your S&P 500 API key.
-
-Usage
-
-To run the pipeline manually, run the following command:
-
-bash
-
-python energy_stocks_to_s3.py
-
-To run the pipeline automatically on a scheduled basis, configure the AWS Lambda function to trigger the energy_stocks_to_s3.py script at your desired schedule.
+    pip install python-dotenv
+    pip install requests
+    pip install pandas
+    pip install boto3
+    pip install beautifulsoup4
