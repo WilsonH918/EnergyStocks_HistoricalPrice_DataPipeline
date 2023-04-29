@@ -90,8 +90,3 @@ class EnergyStocksToS3:
             s3.upload_fileobj(f, self.bucket_name, file_key)
 
         print(f'Successfully uploaded {file_key} to {self.bucket_name}!')
-
-
-
-
-
