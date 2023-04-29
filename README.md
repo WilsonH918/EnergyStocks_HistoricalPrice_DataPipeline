@@ -3,17 +3,9 @@ This is a data pipeline project that retrieves historical price data for energy 
 
 # Requirements  
 To run this project, you will need:  
-AWS account with access to S3, EC2, Lambda, and Snowflake  
-Python 3.x and pip  
-Git  
-
-Installation
-
-    Clone this repository:
-
-    bash
-
-git clone https://github.com/WilsonH918/EnergyStocks_HistoricalPrice_DataPipeline.git
+    AWS account with access to S3, EC2, Lambda, and Snowflake  
+    Python 3.10
+    Git  
 
 Install the required Python packages:
 
