@@ -37,7 +37,7 @@ CREATE OR REPLACE FILE FORMAT s3_snowpipe_csv
 -- Step 3:
 -- Create an S3 external stage with IAM user defined earlier (Step 1)
 CREATE OR REPLACE STAGE s3_snowpipe_stage
-    URL = 's3://snp500-db/snowflake/'
+    URL = 'Your s3 bucket path'
     STORAGE_INTEGRATION = s3_snowflake
     FILE_FORMAT = s3_snowpipe_csv;
 
