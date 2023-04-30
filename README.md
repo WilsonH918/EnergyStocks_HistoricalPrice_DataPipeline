@@ -4,10 +4,10 @@ This is a data pipeline project that retrieves historical price data for energy 
 # Data Pipeline Overview  
 ![image](https://user-images.githubusercontent.com/117455557/235311127-b62d48fd-a53a-4934-9ac1-87d561ffa5a5.png)
 
-# energy_stocks_to_s3.py  
-The pipeline is designed to trigger the script via CloudWatch settings for Lambda, which then triggers an EC2 instance to run the script whenever new data is available. This approach ensures a scalable and cost-effective solution for processing data in a timely manner.  
+# Lambda Function
+The pipeline is designed to trigger the script via CloudWatch settings for Lambda, which then triggers an AWS EC2 instance to run the script whenever new data is available. This approach ensures a scalable and cost-effective solution for processing data in a timely manner.  
 
-Once the data is extracted, the script quickly filters and modifies the necessary columns before saving the data in an S3 data lake. This approach allows for efficient storage and retrieval of data in a highly scalable and durable object store. The data in S3 is then used by Snowflake for further processing, providing a highly available and performant data warehouse solution for analysis and reporting.  
+Once the data is extracted, the "energy_stocks_to_s3.py" script quickly filters and modifies the necessary columns before saving the data in an S3 data lake. This approach allows for efficient storage and retrieval of data in a highly scalable and durable object store. The data in AWS S3 is then used by Snowflake for further processing, providing a highly available and performant data warehouse solution for analysis and reporting.  
 
 In summary, this Python script serves as a critical component of a robust data engineering pipeline designed for efficient processing and storage of historical stock price data for energy stocks in the S&P500. The script's use of modern cloud technologies ensures a scalable, cost-effective, and highly available solution for processing and analyzing data.  
 
