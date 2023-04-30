@@ -11,7 +11,7 @@ Once the data is extracted, the "energy_stocks_to_s3.py" script quickly filters 
 
 In summary, this Python script serves as a critical component of a robust data engineering pipeline designed for efficient processing and storage of historical stock price data for energy stocks in the S&P500. The script's use of modern cloud technologies ensures a scalable, cost-effective, and highly available solution for processing and analyzing data.  
 
-# Lambda Function  
+# Snowpipe  
 
 
 # Requirements  
