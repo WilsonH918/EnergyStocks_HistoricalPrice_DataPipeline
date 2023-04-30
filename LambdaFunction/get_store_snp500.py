@@ -1,3 +1,9 @@
+import boto3
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+import os
+
 class StockData:
     def __init__(self):
         self.s3 = boto3.resource('s3')
