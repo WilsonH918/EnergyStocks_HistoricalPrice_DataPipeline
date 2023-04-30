@@ -21,11 +21,14 @@ The financial data stored in AWS S3 is then used by Snowflake, our data warehous
 
 # Snowpipe  
 
+## Change Data Capture (CDC) in Snowflake
 
 # Requirements  
 To run this project, you will need:
 
-    AWS account with access to S3, EC2, Lambda, and Snowflake
+    AWS account with access to IAM, S3, EC2, Lambda
+    Snowflake account with ACCOUNTADMIN role
+    AlphaVantage API key
     Python 3.10
     Git
 
@@ -38,4 +41,4 @@ Install the required Python packages:
     pip install beautifulsoup4
     
 # Acknowledgments  
-This script was developed by @teikkeat80 and @WilsonH918 as coauthors. Please feel free to suggest improvements and report any bugs.
+This script was developed by @teikkeat80 and @WilsonH918 as co-authors. Please feel free to suggest improvements and report any bugs.
