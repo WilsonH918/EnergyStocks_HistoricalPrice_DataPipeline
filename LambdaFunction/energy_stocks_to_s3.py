@@ -15,20 +15,11 @@ class EnergyStocksToS3:
     def __init__(self):
         load_dotenv()
         self.symbols = self.get_symbols('GICS Sector', 'Energy')
-        self.url = 'https://www.alphavantage.co/query'
-        self.params = {
-            'function': 'TIME_SERIES_DAILY_ADJUSTED',
-            'symbol': None,
-            'outputsize': 'full',
-            'apikey': os.getenv('AlphaVantage_API_KEY')
-        }
         self.csv_file_path = '/tmp/energy_stocks.csv'
         self.bucket_name = 'snp500-db'
     
     def get_symbols(self, criteria, value):
-
         # Get a list of S&P500 symbols from Wikipedia based on a filter criteria (GICS Sector, Sub Sector etc.)
-
         # Returns a list of S&P 500 stock symbol based on your requirements
 
         url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
@@ -37,11 +28,17 @@ class EnergyStocksToS3:
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        table_html = soup.find('table', attrs={'id' : table_id}) # S&P 500 companies table on Wiki
+        table_html = soup.find('table', attrs={'id': table_id})  # S&P 500 companies table on Wiki
         df = pd.read_html(str(table_html))[0]
 
         df_filtered = df[df[criteria] == value]
         symbols = list(df_filtered['Symbol'])
+
+        # Store the symbols in S3 for later reference
+        symbols_df = pd.DataFrame(symbols, columns=['symbol'])
+        s3_object = self.s3.Object(self.bucket_name, self.symbols_key)
+        s3_object.put(Body=symbols_df.to_csv(index=False))
+
         return symbols
         
     def run(self, event, context):
