@@ -7,14 +7,15 @@ import boto3
 from datetime import date
 import time
 import datetime
-from bs4 import BeautifulSoup
+from get_snp500 import StockData
 
 
 class EnergyStocksToS3:
     
     def __init__(self):
         load_dotenv()
-        self.symbols = self.get_symbols('GICS Sector', 'Energy')
+        stock_data = StockData()
+        self.symbols = stock_data.get_symbols('GICS Sector', 'Energy')
         self.url = 'https://www.alphavantage.co/query'
         self.params = {
             'function': 'TIME_SERIES_DAILY_ADJUSTED',
@@ -25,25 +26,6 @@ class EnergyStocksToS3:
         self.csv_file_path = '/tmp/energy_stocks.csv'
         self.bucket_name = 'snp500-db'
     
-    def get_symbols(self, criteria, value):
-
-        # Get a list of S&P500 symbols from Wikipedia based on a filter criteria (GICS Sector, Sub Sector etc.)
-
-        # Returns a list of S&P 500 stock symbol based on your requirements
-
-        url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
-        table_id = 'constituents'
-
-        response = requests.get(url)
-        soup = BeautifulSoup(response.text, 'html.parser')
-
-        table_html = soup.find('table', attrs={'id' : table_id}) # S&P 500 companies table on Wiki
-        df = pd.read_html(str(table_html))[0]
-
-        df_filtered = df[df[criteria] == value]
-        symbols = list(df_filtered['Symbol'])
-        return symbols
-        
     def run(self, event, context):
         # Get the stocks daily adjusted price data from Alpha Vantage
         json_data_list = []
@@ -79,7 +61,7 @@ class EnergyStocksToS3:
         df_filtered.to_csv(self.csv_file_path, index=False)
 
         # Set up Boto3 client for S3
-        s3 = boto3.client('s3', aws_access_key_id = os.getenv('Access_key_ID'), aws_secret_access_key = os.getenv('secret_access_key'))
+        s3 = boto3.client('s3', aws_access_key_id=os.getenv('Access_key_ID'), aws_secret_access_key=os.getenv('secret_access_key'))
 
         # Define the S3 file key to store the data
         sysdate = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
