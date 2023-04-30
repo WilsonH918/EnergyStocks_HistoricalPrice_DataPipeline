@@ -1,8 +1,10 @@
 # EnergyStocks_HistoricalPrice_DataPipeline  
 This is a data pipeline project that retrieves historical price data for energy stocks from the S&P 500 index, stores the data in an AWS S3 bucket, and transforms the data in a Snowflake data warehouse. The project is automated using AWS Lambda to trigger a Python script that runs the pipeline on a scheduled basis.
 
-# Data Pipeline  
+# Data Pipeline Overview  
 ![image](https://user-images.githubusercontent.com/117455557/235311127-b62d48fd-a53a-4934-9ac1-87d561ffa5a5.png)
+
+# Python Script
 
 
 # Requirements  
