@@ -51,4 +51,4 @@ Install the required Python packages:
     pip install beautifulsoup4
     
 # Acknowledgments  
-This script was developed by @teikkeat80 and @WilsonH918 as co-authors. Please feel free to suggest improvements and report any bugs.
+This project was originally developed by @teikkeat80 and @WilsonH918 as co-authors. Please feel free to suggest improvements and report any bugs.
