@@ -2,7 +2,7 @@
 This is a data pipeline project that retrieves historical price data for energy stocks from the S&P 500 index, stores the data in an AWS S3 bucket, and transforms the data in a Snowflake data warehouse. The project is automated using AWS Lambda to trigger a Python script that runs the pipeline on a scheduled basis.
 
 # Data Pipeline Overview  
-![image](https://user-images.githubusercontent.com/117455557/235311127-b62d48fd-a53a-4934-9ac1-87d561ffa5a5.png)
+![image](https://user-images.githubusercontent.com/117455557/235349895-7fe576e3-8ab9-48c2-b3b0-fe7714933b56.png)  
 
 # Lambda Function  
 The pipeline is designed to trigger the script via CloudWatch settings for Lambda, which then triggers an AWS EC2 instance to run the script whenever new data is available. This approach ensures a scalable and cost-effective solution for processing data in a timely manner.  
