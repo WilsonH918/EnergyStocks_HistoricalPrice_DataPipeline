@@ -1,18 +1,10 @@
 /*
-This sql script demonstreates the creation of a Snowpipe 
-or auto data ingestion process.
-Follow the below steps to create the Snowpipe.
-*/
+This sql script demonstrates the creation of Snowpipe 
+for auto data ingestion process.
 
--- Step 0:
--- Generate IAM user for s3 cloud storage integration based on the root user ARN role created in AWS IAM Console.
-CREATE STORAGE INTEGRATION s3_snowflake
-    TYPE = EXTERNAL_STAGE
-    STORAGE_PROVIDER = 'S3'
-    ENABLED = TRUE
-    STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::413508458176:role/snowflake_role'
-    STORAGE_ALLOWED_LOCATIONS = ('s3://snp500-db/snowflake/');
--- Please continue with 'DESC STORAGE INTEGRATION s3_snowflake' to obtain the Snowflake generated ARN.
+Pre-requisites:
+1. AWS Cloud Storage Integration (Snowflake user)
+*/
 
 -- Set DATABASE and SCHEMA
 USE DATABASE FIN_PROJ;
