@@ -1,43 +1,28 @@
-import boto3
-import pandas as pd
-import requests
 from bs4 import BeautifulSoup
-import os
+import requests
+import pandas as pd
 
-class StockData:
-    def __init__(self):
-        self.s3 = boto3.resource('s3')
-        self.bucket_name = 'snp500-db'
-        self.symbols_key = 'symbols.csv'
+def get_symbols(filter=False, criteria=None, value=None):
 
-    def get_symbol(self, symbol):
-        # Retrieve historical stock price data for a given stock symbol from AlphaVantage API
+    """Get a list of S&P500 symbols from Wikipedia based on a filter criteria (GICS Sector, Sub Sector etc.)
 
-        url = 'https://www.alphavantage.co/query'
-        api_key = os.getenv('AlphaVantage_API_KEY')
+    Returns:
+        list: a list of S&P 500 stock symbol based on your requirements
+    """
 
-        params = {
-            'function': 'TIME_SERIES_DAILY_ADJUSTED',
-            'symbol': symbol,
-            'outputsize': 'full',
-            'apikey': api_key
-        }
+    url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
+    table_id = 'constituents'
 
-        response = requests.get(url, params=params)
-        data = response.json()
-        return data
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
 
-    def store_symbol(self, symbol):
-        # Store the historical stock price data for a given stock symbol in S3 data lake
+    table_html = soup.find('table', attrs={'id' : table_id}) # S&P 500 companies table on Wiki
+    df = pd.read_html(str(table_html))[0]
 
-        data = self.get_symbol(symbol)
+    if filter == True:
+        df_filtered = df[df[criteria] == value]
+        symbols = list(df_filtered['Symbol'])
+    else:
+        symbols = list(df['Symbol'])
 
-        # Filter necessary columns and modify them before saving to S3
-        df = pd.DataFrame.from_dict(data['Time Series (Daily)'], orient='index')
-        df = df.reset_index()
-        df = df.rename(columns={'index': 'date', '1. open': 'open', '2. high': 'high', '3. low': 'low', '4. close': 'close', '5. adjusted close': 'adjusted_close', '6. volume': 'volume', '7. dividend amount': 'dividend_amount', '8. split coefficient': 'split_coefficient'})
-        df['symbol'] = symbol
-
-        # Save to S3
-        s3_object = self.s3.Object(self.bucket_name, f'{symbol}.csv')
-        s3_object.put(Body=df.to_csv(index=False))
+    return symbols
