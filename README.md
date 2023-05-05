@@ -13,7 +13,7 @@ The pipeline and runtimes were designed to host on Cloud environments (AWS and S
 The first part of the pipeline is to design a small database for storing historical S&P500 listings and tracking their changes. The data is stored in a semi-structured (json strings) method. This process is running as an AWS Lambda function and triggered via CloudWatch Event Schedules. The lambda function and its dependencies can be found in the folder "lambda_functions/snp500_ticker" within this repository.
 
 ## Extracting symbols
-This Python script (get_symbols.py) creates a function which utilises the BeautifulSoup library to scrap table data from a Wikipedia page and retrieve a full list of S&P500 listed tickers/symbols at point in time. The function also allows filtering data based on specific criterias such as GICS sector, sub industries, etc.
+This Python script (get_symbols.py) creates a function which utilises the BeautifulSoup library to scrap table data from a Wikipedia page and retrieve a full list of S&P500 listed tickers/symbols at point in time. The function also allows filtering data based on specific criterias such as GICS sector, sub industries, etc. (We have applied filter on GICS defined Energy sector in this project as an example)
 
 ## Loading semi-structured ticker data into AWS S3
 After receiving the list of symbols at point in time, the lambda function (write_symbols_lambda_function.py) compares the changes in the current list with last retrieved list and transform the data into a final output. The output also consists of data such as added/removed symbols at point in time. Finally, the data will be stored into an S3 location. This information will be used in subsequent parts of the data pipeline.
