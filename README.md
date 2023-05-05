@@ -1,5 +1,5 @@
 # S&P500 Listed Stocks Historical Price Survivorship Bias Reduced Database
-This project attempts to create a survivorship bias reduced database in Snowflake Cloud for SNP 500 listed stock historical daily prices. The data pipeline consists of three parts:
+This project attempts to create a survivorship bias reduced database in Snowflake Cloud for S&P500 listed stock historical daily prices. The data pipeline consists of three parts:
     1. a WIKI web scraping process to obtain the S&P 500 listed stock symbols data
     2. an ETL process which runs in AWS Lambda serverless runtime environment for retrieving historical price data using the data from part 1.
     3. a Snowpipe for AWS S3 data extraction and a Change Data Capture (CDC) process to load our data into the final destination in Snowflake.
