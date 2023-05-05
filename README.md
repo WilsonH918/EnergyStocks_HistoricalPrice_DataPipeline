@@ -56,7 +56,8 @@ Install the required Python packages:
     pip install beautifulsoup4
     pip install regex
 
-IMPORTANT! - Please note that these packages (apart from boto3) should also be installed on a Linux environment (can be done in a Linux Machine, AWS Cloud9 Linux EC2 Instance, Docker, etc.) and packaged into an AWS Lambda Layer to support your Lambda functions running without errors.
+**IMPORTANT!**
+Please note that these packages (apart from boto3) should also be installed on a Linux environment (can be done in a Linux Machine, AWS Cloud9 Linux EC2 Instance, Docker, etc.) and packaged into an AWS Lambda Layer to support your Lambda functions running without errors.
     
 # Acknowledgments  
 This project was originally developed by @teikkeat80 and @WilsonH918 as co-authors. Please feel free to suggest improvements and report any bugs.
