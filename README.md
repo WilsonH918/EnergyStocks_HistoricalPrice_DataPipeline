@@ -2,7 +2,7 @@
 This project attempts to create a survivorship bias reduced database in Snowflake Cloud for S&P500 listed stock historical daily prices. The data pipeline consists of three parts:
 
 1. a WIKI web scraping process to obtain the S&P500 listed stock symbols data
-2. an ETL process which runs in AWS Lambda serverless runtime environment for retrieving historical price data.
+2. an ETL process which runs in AWS Lambda serverless environment for retrieving historical price data.
 3. a Snowpipe for AWS S3 data extraction and a Change Data Capture (CDC) process to load our data into the final destination in Snowflake.
 
 # Data Pipeline Overview
@@ -22,7 +22,7 @@ After receiving the list of symbols at point in time, the lambda function (write
 # S&P500 Historical Daily Price Data ETL process
 The second part of the data pipeline extracts data via API calls and loads the cleaned up and structured data into another S3 location. This process was written in a Python script (lambda_functions/snp500_data/price_data_etl_lambda_function.py) and it was designed to be triggered by another AWS Lambda function via CloudWatch Event Schedules on a daily basis (pre-market opening times).
 
-Using the data that we received in part 1 of the data pipeline, we are able to feed the payload information for extracting time-series daily price data from AlphaVantage RESTful API. Next, the data is transformed into a tabular format from json string format. Finally, the data is loaded into a AWS S3 bucket, waiting to be consumed by Snowflake via Snowpipe (part 3 of the data pipeline). By storing data in S3, we can also take advantage of AWS's features like versioning, access control, and lifecycle policies.
+Using the data that we received in part 1 of the data pipeline, we are able to feed the payload information for extracting time-series daily price data from Alpha Vantage's RESTful API. Next, the data is transformed into a tabular format from json string format. Finally, the data is loaded into a AWS S3 bucket, waiting to be consumed by Snowflake via Snowpipe (part 3 of the data pipeline). By storing data in S3, we can also take advantage of AWS's features like versioning, access control, and lifecycle policies.
 
 # Snowpipe and Snowflake CDC process
 The third and final part of this pipeline is to load the data from AWS S3 into Snowflake via Snowpipe. By using Snowflake as our final data storage, we are able to make use of its powerful data warehousing capabilities and highly performant cloud solutions.
@@ -43,7 +43,7 @@ To run this project, you will need:
 
     AWS account with access to IAM, S3, EC2, Lambda
     Snowflake account with ACCOUNTADMIN role
-    AlphaVantage API key
+    Alpha Vantage API key
     Python 3.10
     Git
 
