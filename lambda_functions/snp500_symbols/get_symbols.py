@@ -4,11 +4,9 @@ import pandas as pd
 
 def get_symbols(filter=False, criteria=None, value=None):
 
-    """Get a list of S&P500 symbols from Wikipedia based on a filter criteria (GICS Sector, Sub Sector etc.)
+    # Get a list of S&P500 symbols from Wikipedia based on a filter criteria (GICS Sector, Sub Sector etc.)
 
-    Returns:
-        list: a list of S&P 500 stock symbol based on your requirements
-    """
+    # Returns a list of S&P 500 stock symbol based on your requirements
 
     url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
     table_id = 'constituents'

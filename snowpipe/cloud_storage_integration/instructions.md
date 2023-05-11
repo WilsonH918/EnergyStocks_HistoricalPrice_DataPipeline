@@ -2,7 +2,7 @@ This document provides instructions to configure secure access from Snowflake to
 The process follows the Snowflake official documentation: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
 
 Step 1:
-Create an IAM policy using AWS IAM service. (Copy and paste the content from SnowflakeIAMPolicy.json into the policy editor, make sure to set your bucket and prefix names.)
+Create an IAM policy using AWS IAM service. (Copy and paste the content from snowflake_IAM_policy.json into the policy editor, make sure to set your bucket and prefix names.)
 
 Step 2:
 Create the IAM role using 'Another AWS account' as trusted entity, and enter your own AWS account ID as a temporary ID.
@@ -15,6 +15,6 @@ Step 4:
 Run 'DESC INTEGRATION <your_integration_name>;' in Snowflake to retrieve the Snowflake created 'STORAGE_AWS_IAM_USER_ARN' and 'STORAGE_AWS_EXTERNAL_ID'.
 
 Step 5:
-Go back to the role created in Step 2, select trust relationship -> edit trust relationship -> modify the policy here based on file SnowflakeTrustPolicy.json, make sure to change the values accordingly to your output from Step 4.
+Go back to the role created in Step 2, select trust relationship -> edit trust relationship -> modify the policy here based on file snowflake_trust_policy.json, make sure to change the values accordingly to your output from Step 4.
 
 Your AWS Snowflake Storage Integration is created!
