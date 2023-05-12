@@ -17,5 +17,4 @@ volume integer,
 dividend_amount double,
 split_coefficient double,
 symbol string,
-primary key ("date", symbol)
-);
+primary key ("date", symbol));
