@@ -23,8 +23,7 @@ CREATE OR REPLACE TABLE snp500_price_stagetable (
     dividend_amount double,
     split_coefficient double,
     symbol string,
-    primary key ("date", symbol)
-);
+    primary key ("date", symbol));
 
 -- Step 2:
 -- Create a CSV file format for file type references in following steps
